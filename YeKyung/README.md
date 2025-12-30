@@ -14,6 +14,7 @@
 - 로컬 + 서버 병행 개발
 
 ### 📦 라이브러리 및 요구사항
+
 ```txt
 torch
 transformers
@@ -21,6 +22,7 @@ sentence-transformers
 elasticsearch
 numpy
 pandas
+```
 
 🏁 대회 정보
 🧾 대회 개요
