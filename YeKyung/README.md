@@ -6,7 +6,7 @@
 
 ## 👥 Team (Search Spark 4조)
 
-| ![박준수](https://github.com/parkjunsu3321) | ![권문진](https://github.com/moongs95) | ![손은혜](https://github.com/realtheai) | ![이수민](https://github.com/Leesoomin97) | ![권효주](https://github.com/hopeplanting) | ![허예경](https://github.com/yekyung821) |
+| <img src="https://github.com/parkjunsu3321.png" width="100"> | <img src="https://github.com/moongs95.png" width="100"> | <img src="https://github.com/realtheai.png" width="100"> | <img src="https://github.com/Leesoomin97.png" width="100"> | <img src="https://github.com/hopeplanting.png" width="100"> | <img src="https://github.com/yekyung821.png" width="100"> |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | **박준수** | **권문진** | **손은혜** | **이수민** | **권효주** | **허예경** |
 | 팀장 · 모델설계 및 실험 | EDA · 모델 실험 | 모델설계 및 실험 | 모델설계 및 실험 | 모델설계 및 실험 | 모델설계 및 실험 |
@@ -22,6 +22,7 @@
 ### 💻 개발 환경
 * **Language**: Python 3.10
 * **Search Engine**: Elasticsearch 8.x
+* **LLM API**: GPT-4o-mini (질의 이해 및 데이터 분류용)
 * **Infra**: GPU (CUDA) / Local + Server 병행 개발
 * **Libraries**: `torch`, `transformers`, `sentence-transformers`, `elasticsearch`, `numpy`, `pandas`
 
@@ -35,7 +36,7 @@
 * **평가 지표**: **MAP@3 (Mean Average Precision at 3)**
 
 ### ⏱ 대회 일정
-* **기간**: 2025.01.18 ~ 2025.01.29
+* **기간**: 2025.12.18 ~ 2025.12.29
 
 ---
 
@@ -45,7 +46,7 @@
 | 구분 | 상세 내용 |
 | :--- | :--- |
 | **문서 데이터** | 총 4,272개 (과학: 3,849개 / 비과학: 423개) |
-| **질의 데이터** | 총 220개 (과학: 160개 / 비과학: 40개 - 인사, 자기소개 등 포함) |
+| **질의 데이터** | 총 220개 (과학: 160개 / 비과학: 60개 - 인사, 자기소개 등 포함) |
 | **분류 도구** | Solar-pro2 기반 `is_science` 및 `topic` 분류 수행 |
 
 ### 🔍 EDA 및 인사이트
@@ -72,7 +73,7 @@
 ### ⚙ 주요 전략
 1. **Query Builder**: Standalone Query 생성 프롬프트 고도화를 통해 대화 맥락 반영.
 2. **모델 특성 반영**: E5 모델 전용 포맷 및 Cosine Similarity 적용.
-3. **Recall 우선 전략**: 초기 후보군을 대폭 확장(`num_candidates` ≈ 3,000)하여 누락을 방지하고 Reranker로 Precision 확보.
+3. **Recall 우선 전략**: 초기 후보군을 대폭 확장(`num_candidates` ≈ 1,200)하여 누락을 방지하고 Reranker로 Precision 확보.
 
 ---
 
@@ -102,9 +103,9 @@ graph TD
 
 | 단계 | 주요 작업 내용 | MAP |
 | :--- | :--- | :---: |
-| **초기 설정** | Baseline (Basic Retrieval) | ~0.7470 |
-| **Query 개선** | Prompt Engineering & Standalone Query | ~0.8727 |
-| **최종 파이프라인** | **Hybrid Search + 2-Stage Reranker Ensemble** | **0.8970** |
+| **초기 설정** | Baseline (Basic Retrieval) | ~0.7470 (중간) |
+| **Query 개선** | Prompt Engineering & Standalone Query | ~0.8727 (중간) |
+| **최종 파이프라인** | **Hybrid Search + 2-Stage Reranker Ensemble** | **0.8970** (최종) |
 
 * **발표 자료**: [Search Spark 4조 발표자료](https://docs.google.com/presentation/d/1WYHdQhw7ptXF1X_0bbvAIPcxq6Z7kkr7/edit?usp=sharing&ouid=117949632148545267959&rtpof=true&sd=true)
 
