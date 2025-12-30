@@ -6,7 +6,7 @@
 
 ## 👥 Team (Search Spark 4조)
 
-| ![박준수](https://github.com/parkjunsu3321) | ![권문진](https://github.com/moongs95) | ![손은혜](https://github.com/realtheai) | ![이수민](https://github.com/Leesoomin97) | ![권효주](https://github.com/hopeplanting) | ![허예경](https://github.com/yekyung821) |
+| <img src="https://github.com/parkjunsu3321.png" width="100"> | <img src="https://github.com/moongs95.png" width="100"> | <img src="https://github.com/realtheai.png" width="100"> | <img src="https://github.com/Leesoomin97.png" width="100"> | <img src="https://github.com/hopeplanting.png" width="100"> | <img src="https://github.com/yekyung821.png" width="100"> |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | **박준수** | **권문진** | **손은혜** | **이수민** | **권효주** | **허예경** |
 | 팀장 · 모델설계 및 실험 | EDA · 모델 실험 | 모델설계 및 실험 | 모델설계 및 실험 | 모델설계 및 실험 | 모델설계 및 실험 |
