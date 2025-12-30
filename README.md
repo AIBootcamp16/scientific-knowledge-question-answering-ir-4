@@ -2,7 +2,7 @@
 
 ## Team
 
-| ![박준수](https://github.com/parkjunsu3321) | ![권문진](https://github.com/moongs95) | ![손은혜](https://github.com/realtheai) | ![이수민](https://github.com/Leesoomin97) | ![권효주](https://github.com/hopeplanting) | ![허예경](https://github.com/yekyung821) |
+| ![박준수](https://avatars.githubusercontent.com/parkjunsu3321) | ![권문진](https://avatars.githubusercontent.com/moongs95) | ![손은혜](https://avatars.githubusercontent.com/realtheai) | ![이수민](https://avatars.githubusercontent.com/Leesoomin97) | ![권효주](https://avatars.githubusercontent.com/hopeplanting) | ![허예경](https://avatars.githubusercontent.com/yekyung821) |
 | :--------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------: |
 | 박준수 | 권문진 | 손은혜 | 이수민 | 권효주 | 허예경 |
 | 팀장 · 모델설계 및 실험 | EDA · 모델 실험 | 모델설계 및 실험 | 모델설계 및 실험 | 모델설계 및 실험 | 모델설계 및 실험 |
