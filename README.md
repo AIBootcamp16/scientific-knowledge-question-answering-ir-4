@@ -22,6 +22,7 @@
 ### 💻 개발 환경
 * **Language**: Python 3.10
 * **Search Engine**: Elasticsearch 8.x
+* **LLM API**: GPT-4o-mini (질의 이해 및 데이터 분류용)
 * **Infra**: GPU (CUDA) / Local + Server 병행 개발
 * **Libraries**: `torch`, `transformers`, `sentence-transformers`, `elasticsearch`, `numpy`, `pandas`
 
@@ -31,7 +32,80 @@
 
 ### 🧾 대회 개요
 * **대회명**: Scientific Knowledge IR (RAG 기반 정보 검색 경진대회)
-* **주최**: FAST종) 종
+* **주최**: FAST CAMPUS
+* **평가 지표**: **MAP@3 (Mean Average Precision at 3)**
+
+### ⏱ 대회 일정
+* **기간**: 2025.12.18 ~ 2025.12.29
+
+---
+
+## 📊 데이터 분석 및 전처리
+
+### 🗂 데이터셋 개요
+| 구분 | 상세 내용 |
+| :--- | :--- |
+| **문서 데이터** | 총 4,272개 (과학: 3,849개 / 비과학: 423개) |
+| **질의 데이터** | 총 220개 (과학: 160개 / 비과학: 60개 - 인사, 자기소개 등 포함) |
+| **분류 도구** | Solar-pro2 기반 `is_science` 및 `topic` 분류 수행 |
+
+### 🔍 EDA 및 인사이트
+* **분야 편중**: 문서 데이터가 생물, 물리, 지구과학 분야에 편중됨을 확인.
+* **검색의 한계**: 'General Science' 문서 존재로 인해 단순 키워드 검색(Sparse)만으로는 변별력 확보가 어려움.
+* **질의 다양성**: 비지식성 질의(Small Talk)가 다수 포함되어 있어 **Smalltalk Guard** 로직의 필요성 도출.
+
+---
+
+## 🤖 모델링 및 파이프라인
+
+### 🧠 모델 및 기술 스택
+* **Embedding 모델**:
+    * `KURE-v1`: 한국어 과학 용어 특화 표현 학습.
+    * `intfloat/multilingual-e5-large-instruct`: 다국어 대응 및 `query:`/`passage:` prefix 활용.
+* **Retrieval 전략**:
+    * **Multi-query**: original / expanded / conceptual query 생성.
+    * **Hybrid Search**: BM25(Nori) + Dense Embedding (Dense : Sparse = 0.5 : 0.5).
+    * **RRF (Reciprocal Rank Fusion)**: 검색 결과의 효과적인 통합.
+* **Reranking**:
+    * **Stage 1**: 후보군 필터링.
+    * **Stage 2**: `BGE-reranker-v2-m3` 및 Fine-tuned Korean Reranker 앙상블을 통한 정밀 재정렬.
+
+### ⚙ 주요 전략
+1. **Query Builder**: Standalone Query 생성 프롬프트 고도화를 통해 대화 맥락 반영.
+2. **모델 특성 반영**: E5 모델 전용 포맷 및 Cosine Similarity 적용.
+3. **Recall 우선 전략**: 초기 후보군을 대폭 확장(`num_candidates` ≈ 1,200)하여 누락을 방지하고 Reranker로 Precision 확보.
+
+---
+
+## 🔄 시스템 아키텍처 (Pipeline)
+
+
+
+```mermaid
+graph TD
+    A[User Query] --> B{질의 유형 분석}
+    B -- 비과학 --> C[Smalltalk Guard / 검색 생략]
+    B -- 과학 --> D[Standalone Query 생성]
+    D --> E[Multi-query Expansion]
+    E --> F[Hybrid Retrieval: BM25 + Dense]
+    F --> G[RRF 기반 결과 결합]
+    G --> H[2-Stage Reranking]
+    H --> I[Top-K 문서 선택]
+    I --> J[최종 결과 도출]
+```
+
+---
+
+## 🏆 결과 및 성과
+
+### 📈 성능 지표 (Leader Board)
+프롬프트 및 질의 이해 로직 개선과 하이브리드 검색 전략을 통해 초기 모델 대비 **약 21% 이상의 성능 향상**을 달성했습니다.
+
+| 단계 | 주요 작업 내용 | MAP |
+| :--- | :--- | :---: |
+| **초기 설정** | Baseline (Basic Retrieval) | ~0.7470 (중간) |
+| **Query 개선** | Prompt Engineering & Standalone Query | ~0.8727 (중간) |
+| **최종 파이프라인** | **Hybrid Search + 2-Stage Reranker Ensemble** | **0.8970** (최종) |
 
 * **발표 자료**: [Search Spark 4조 발표자료](https://docs.google.com/presentation/d/1WYHdQhw7ptXF1X_0bbvAIPcxq6Z7kkr7/edit?usp=sharing&ouid=117949632148545267959&rtpof=true&sd=true)
 
@@ -56,5 +130,6 @@
 * Cormack et al., 2009, *Reciprocal Rank Fusion*
 * Shuster et al., 2021, *Standalone Question Generation*
 * Upstage Tech Blog / Hugging Face Korea Blog
+
 ---
 📫 **Contact**: 프로젝트 관련 문의는 이슈 또는 PR로 자유롭게 남겨주세요! 🙂
