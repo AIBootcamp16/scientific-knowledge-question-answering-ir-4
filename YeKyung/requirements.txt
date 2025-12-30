@@ -1,0 +1,37 @@
+# Core RAG
+sentence-transformers==2.2.2
+huggingface_hub==0.19.4
+elasticsearch==8.8.0
+openai==1.7.2
+httpx==0.24.1
+
+# Core utilities
+numpy
+pandas
+tqdm
+pyyaml
+python-dotenv
+
+# ML / NLP
+torch
+transformers
+scikit-learn
+
+# Retrieval / Vector
+faiss-gpu
+rank-bm25
+
+# RAG framework (optional but likely)
+langchain
+langchain-community
+langchain-text-splitters
+
+# Experiment / Debug
+wandb
+matplotlib
+seaborn
+rich
+
+# conda install -c pytorch -c nvidia pytorch pytorch-cuda=12.1
+# conda install -c conda-forge faiss-gpu
+# python -c "import torch; print('torch', torch.__version__); print('cuda available', torch.cuda.is_available()); print('torch cuda', torch.version.cuda)"
