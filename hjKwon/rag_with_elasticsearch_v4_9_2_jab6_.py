@@ -149,7 +149,7 @@ multiturn_standalone_query_prompt = """# 역할
 """
 
 # ============================================================================
-# Fallback Logger (v4.9.2.2_f.l NEW)
+# Fallback Logger
 # ============================================================================
 
 class FallbackLogger:
@@ -186,7 +186,7 @@ class FallbackLogger:
 
 
 # ============================================================================
-# SEARCH_OFF 기능 (Rule 기반) - v4.9.2_2 개선 버전
+# SEARCH_OFF 기능 (Rule 기반) 
 # ============================================================================
 
 def should_search(query: str) -> bool:
@@ -322,7 +322,7 @@ def should_search(query: str) -> bool:
 
 
 # ============================================================================
-# Rule 기반 Complexity Classification - v4.9 (유지)
+# Rule 기반 Complexity Classification 
 # ============================================================================
 
 def classify_complexity_rule(query: str) -> Dict[str, Any]:
@@ -435,7 +435,7 @@ def classify_complexity_rule(query: str) -> Dict[str, Any]:
 
 
 # ============================================================================
-# Rule 기반 Query Augmentation - v4.9.2 간단 버전 (유지)
+# Rule 기반 Query Augmentation
 # ============================================================================
 
 def augment_query_rule(query: str) -> Dict[str, str]:
@@ -509,7 +509,7 @@ def call_openai_with_retry(messages: List[Dict], model: str = QUERY_LLM_MODEL, m
 
 
 # ============================================================================
-# LLM 기반 (Fallback) - v4.8과 동일
+# LLM 기반 (Fallback)
 # ============================================================================
 
 class QueryAugmenter:
@@ -804,18 +804,10 @@ def reciprocal_rank_fusion(rankings: List[List[str]], k: int = RRF_K) -> List[Tu
 
 
 # ============================================================================
-# RAG Pipeline v4.9.2_1
+# RAG Pipeline 
 # ============================================================================
 
 class RAGPipelineV4922:
-    """
-    RAG v4.9.2_2 파이프라인
-    
-    개선사항:
-    1. v4.9.2_1 기반 (정보지식 교사)
-    2. SEARCH_OFF 로직 개선 (과학 질문 오분류 해결)
-    3. 5개 오분류 질문 복구
-    """
     
     def __init__(self, es: Elasticsearch, index_name: str = "rag_v4922"):
         self.es = es
@@ -1155,7 +1147,7 @@ mappings = {
 
 
 # ============================================================================
-# LLM 설정 (v4.9.2_1: 정보지식 교사 역할 추가)
+# LLM 설정 (정보지식 교사 역할 추가)
 # ============================================================================
 
 llm_client = OpenAI(api_key=OPENAI_API_KEY)
@@ -1386,7 +1378,7 @@ def eval_rag(eval_filename: str, output_filename: str, include_references: bool 
 
 
 # ============================================================================
-# Main (v4.9.2_1)
+# Main 
 # ============================================================================
 
 if __name__ == "__main__":
